@@ -1,17 +1,16 @@
 package com.shop.login.entity;
 
-import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
-public class User implements Serializable {
+public class User {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
 	@JsonProperty("id")
 	private String id;
@@ -46,9 +45,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+
 
 	public User(String id, String userName, String password) {
 		super();
