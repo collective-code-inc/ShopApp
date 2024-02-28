@@ -18,17 +18,27 @@ public class LoginServiceImpl implements LoginInterface {
 	public String persistData(User user) {
 
 		UserEntity userEntity = new UserEntity();
+		String message;
 
 		userEntity.setId(user.getId());
 		userEntity.setUserName(user.getUserName());
 		userEntity.setPassword(user.getPassword());
+		boolean checkUser = checkExistingUser(user.getUserName());
+		if (checkUser != true) {
+			userRepo.save(userEntity);
+			message = "User Registered";
+		} else {
+			message = "User Already Exists";
+		}
 
-		userRepo.save(userEntity);
-		String response = "Success";
-
-		return response;
+		return message;
 		// TODO Auto-generated method stub
 
+	}
+
+	private boolean checkExistingUser(String userName) {
+		UserEntity user = userRepo.findByUserName(userName);
+		return  user != null ;
 	}
 
 }

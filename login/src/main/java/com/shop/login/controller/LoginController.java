@@ -3,7 +3,6 @@ package com.shop.login.controller;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +20,17 @@ public class LoginController {
 	@Autowired
 	LoginInterface loginInterface;
 
-	@PostMapping(value = "/login", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/register", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String login(@RequestBody User user) {
+	public UserResponse createUser(@RequestBody User user) {
 		UserResponse userResponse = new UserResponse();
 		String response = loginInterface.persistData(user);
 		userResponse.setResponse(response);
-		return "Success";
+		return userResponse;
 
 	}
+
+	// @PostMapping(value = "/login", consumes = APPLICATION_JSON_VALUE, produces =
+	// APPLICATION_JSON_VALUE)
+
 }
