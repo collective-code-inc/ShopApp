@@ -1,31 +1,67 @@
 package com.shop.login.entity.repo;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "create_user")
+@Table(name = "USER", schema = "shop_app")
 public class UserEntity {
-	
+
 	@Id
-	@Column(name = "id")
-	private String id;
-	
-	@Column(name = "userName")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+	@SequenceGenerator(name = "user_id_seq", sequenceName = "USER_ID_SEQ_GEN")
+	private Long id;
+
+	@Column(name = "EMAIL_ID", nullable = false, unique = true)
+	private String email;
+
+	@Column(name = "FIRST_NAME", nullable = false)
+	private String firstName;
+
+	@Column(name = "LAST_NAME", nullable = false)
+	private String lastName;
+
+	@Column(name = "USER_NAME", nullable = false)
 	private String userName;
-	
-	@Column(name = "password")
+
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getUserName() {
@@ -44,9 +80,12 @@ public class UserEntity {
 		this.password = password;
 	}
 
-	public UserEntity(String id, String userName, String password) {
+	public UserEntity(Long id, String email, String firstName, String lastName, String userName, String password) {
 		super();
 		this.id = id;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
 	}
@@ -57,8 +96,10 @@ public class UserEntity {
 
 	@Override
 	public String toString() {
-		return "UserEntity [id=" + id + ", userName=" + userName + ", password=" + password + "]";
+		return "UserEntity [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", password=" + password + "]";
 	}
-
 	
+	
+
 }

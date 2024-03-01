@@ -1,32 +1,61 @@
 package com.shop.login.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
 public class User {
-	
+
 	/**
 	 * 
 	 */
-	//private static final long serialVersionUID = 1L;
-
+	// private static final long serialVersionUID = 1L;
 	@JsonProperty("id")
-	private String id;
-	
+	private Long id;
+
+	@JsonProperty("email_Id")
+	private String email_Id;
+
+	@JsonProperty("firstName")
+	private String firstName;
+
+	@JsonProperty("lastName")
+	private String lastName;
+
 	@JsonProperty("userName")
 	private String userName;
-	
+
 	@JsonProperty("password")
 	private String password;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmail_Id() {
+		return email_Id;
+	}
+
+	public void setEmail_Id(String email_Id) {
+		this.email_Id = email_Id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getUserName() {
@@ -45,11 +74,12 @@ public class User {
 		this.password = password;
 	}
 
-
-
-	public User(String id, String userName, String password) {
+	public User(Long id, String email_Id, String firstName, String lastName, String userName, String password) {
 		super();
 		this.id = id;
+		this.email_Id = email_Id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
 	}
@@ -60,9 +90,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", password=" + password + "]";
+		return "User [id=" + id + ", email_Id=" + email_Id + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", password=" + password + "]";
 	}
-	
-	
-	
+
 }

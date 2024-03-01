@@ -29,8 +29,7 @@ public class LoginController {
 		return userResponse;
 
 	}
-
-	// @PostMapping(value = "/login", consumes = APPLICATION_JSON_VALUE, produces =
-	// APPLICATION_JSON_VALUE)
-
+	
+	//@PostMapping(value = "/login", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+	
 }

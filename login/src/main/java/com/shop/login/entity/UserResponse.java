@@ -1,9 +1,11 @@
 package com.shop.login.entity;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserResponse {
-	
+
 	@JsonProperty("response")
 	public String response;
 
@@ -23,6 +25,5 @@ public class UserResponse {
 	public UserResponse() {
 		super();
 	}
-
 
 }
