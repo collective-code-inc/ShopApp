@@ -3,8 +3,8 @@ package com.shop.login.dto.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserReq {
-    @JsonProperty("email_Id")
-	private String email_Id;
+    @JsonProperty("emailId")
+	private String emailId;
 
 	@JsonProperty("firstName")
 	private String firstName;
@@ -19,11 +19,11 @@ public class UserReq {
 	private String password;
 
 	public String getEmail_Id() {
-		return email_Id;
+		return emailId;
 	}
 
 	public void setEmail_Id(String email_Id) {
-		this.email_Id = email_Id;
+		this.emailId = email_Id;
 	}
 
 	public String getFirstName() {
@@ -58,8 +58,8 @@ public class UserReq {
 		this.password = password;
 	}
 
-    public UserReq(String email_Id, String firstName, String lastName, String userName, String password) {
-		this.email_Id = email_Id;
+    public UserReq(String emailId, String firstName, String lastName, String userName, String password) {
+		this.emailId = emailId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
