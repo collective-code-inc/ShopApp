@@ -1,17 +1,9 @@
-package com.shop.login.entity;
+package com.shop.login.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class User {
-
-	/**
-	 * 
-	 */
-	// private static final long serialVersionUID = 1L;
-	@JsonProperty("id")
-	private Long id;
-
-	@JsonProperty("email_Id")
+public class UserReq {
+    @JsonProperty("email_Id")
 	private String email_Id;
 
 	@JsonProperty("firstName")
@@ -25,14 +17,6 @@ public class User {
 
 	@JsonProperty("password")
 	private String password;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getEmail_Id() {
 		return email_Id;
@@ -74,24 +58,12 @@ public class User {
 		this.password = password;
 	}
 
-	public User(Long id, String email_Id, String firstName, String lastName, String userName, String password) {
-		super();
-		this.id = id;
+    public UserReq(String email_Id, String firstName, String lastName, String userName, String password) {
 		this.email_Id = email_Id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
 	}
-
-	public User() {
-		super();
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", email_Id=" + email_Id + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", userName=" + userName + ", password=" + password + "]";
-	}
-
+    
 }

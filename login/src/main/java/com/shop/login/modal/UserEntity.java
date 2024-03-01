@@ -1,4 +1,6 @@
-package com.shop.login.entity.repo;
+package com.shop.login.modal;
+
+import com.shop.login.dto.user.UserReq;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +11,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "USER", schema = "shop_app")
+@Table(name = "USERS")
 public class UserEntity {
 
 	@Id
@@ -98,6 +100,17 @@ public class UserEntity {
 	public String toString() {
 		return "UserEntity [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", userName=" + userName + ", password=" + password + "]";
+	}
+
+	public static UserEntity toUserEntity(UserReq userReq) {
+		UserEntity userEntity = new UserEntity();
+
+		userEntity.setEmail(userReq.getEmail_Id());
+		userEntity.setFirstName(userReq.getFirstName());
+		userEntity.setLastName(userReq.getLastName());
+		userEntity.setUserName(userReq.getUserName());
+		userEntity.setPassword(userReq.getPassword());
+		return userEntity;
 	}
 	
 	

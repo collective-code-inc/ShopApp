@@ -1,4 +1,4 @@
-package com.shop.login.entity;
+package com.shop.login.dto.user;
 
 import java.util.Optional;
 

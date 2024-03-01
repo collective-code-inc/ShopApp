@@ -9,27 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.login.entity.User;
-import com.shop.login.entity.UserResponse;
-import com.shop.login.service.LoginInterface;
+import com.shop.login.dto.user.UserReq;
+import com.shop.login.dto.user.UserResponse;
+import com.shop.login.service.LoginService;
 
 @RestController
 @RequestMapping(path = "/api")
 public class LoginController {
 
 	@Autowired
-	LoginInterface loginInterface;
+	LoginService loginInterface;
 
 	@PostMapping(value = "/register", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public UserResponse createUser(@RequestBody User user) {
+	public UserResponse createUser(@RequestBody UserReq user) {
 		UserResponse userResponse = new UserResponse();
 		String response = loginInterface.persistData(user);
 		userResponse.setResponse(response);
 		return userResponse;
 
 	}
-	
-	//@PostMapping(value = "/login", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	
 }

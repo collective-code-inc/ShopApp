@@ -1,7 +1,7 @@
 ---------------------------------------------
 ----Create Tables----------------------------
 ---------------------------------------------
-create table USER
+create table USERS
 (
     id         int8         not null,
     EMAIL_ID   varchar(255) not null,
