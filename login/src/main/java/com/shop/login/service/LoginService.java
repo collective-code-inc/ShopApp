@@ -18,7 +18,7 @@ public class LoginService {
 	UserRepo userRepo;
 	
 	@Transactional
-	public String persistData(UserReq user) {
+	public String registerUser(UserReq user) {
 		UserEntity userEntity = UserEntity.toUserEntity(user);
 		if (userRepo.findByUserName(user.getUserName()) == null ) {
 			userRepo.save(userEntity);
