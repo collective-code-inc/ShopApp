@@ -26,29 +26,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String requestHeader = request.getHeader("Authorization");
 
-        String token = null;
         if (requestHeader != null && requestHeader.startsWith("Bearer")) {
 
-            token = requestHeader.substring(7);
-            String username = jwtUtil.extractUsername();
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-              
-                Boolean validateToken = this.jwtUtil.validateToken(token);
-                if (validateToken) {
+            String token = requestHeader.substring(7);
+            if(jwtUtil.validateToken(token)) {
+                String username = jwtUtil.extractUsername();
+                if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     authenticate(username);
-                } else {
-                    logger.info("Validation fails !!");
                 }
             }
-
-
         } else if(request.getRequestURL().toString().contains("/api/login")) {
             authenticate("");
         }
-
         allow(request, response, filterChain);
-
-
     }
 
     private void allow(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {

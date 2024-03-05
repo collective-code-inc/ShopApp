@@ -7,15 +7,8 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Payload;
-
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,11 +22,7 @@ public class JwtUtil {
     private static Algorithm algorithm;
 
     private static final Logger log = Logger.getLogger(JwtUtil.class.getName());
-    
     private static Optional<DecodedJWT> jwt;
-
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-
     private String secret = "afafasfafafasfasfasfafacasdasfasxASFACASDFACASDFASFASFDAFASFASDAADSCSDFADCVSGCFVADXCcadwavfsfarvf";
 
     public JwtUtil() {
@@ -51,20 +40,16 @@ public class JwtUtil {
 
     private String createToken(Map<String, Object> claims, String issuer) {
         try {
-            
-            return Jwts.builder().setClaims(claims).setSubject(issuer).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS512) // <-- This can be helpful to you
-                .compact();
+            return JWT.create()
+                    .withHeader(claims)
+                    .withIssuer(issuer)
+                    .withIssuedAt(new Date(System.currentTimeMillis()))
+                    .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                    .sign(algorithm);
         } catch (JWTCreationException e) {
             log.log(Level.SEVERE, "Could not create a JWT Token", e);
             return null;
         }
-    }
-
-    private Key getSigningKey() {
-        byte[] keyBytes = this.secret.getBytes(StandardCharsets.UTF_8);
-        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public Boolean validateToken(String token) {
