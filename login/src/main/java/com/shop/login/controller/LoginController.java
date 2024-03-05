@@ -41,14 +41,16 @@ public class LoginController {
 	@PostMapping(value = "/login", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<JwtResponse> login(@RequestBody LoginReq loginReq) {
+		String token = null;
+		HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
 		String response = loginService.login(loginReq);
 		if(response.equals(Constants.LOGIN_SUCCESS)) {
-			String token = jwtUtil.generateToken(loginReq.getUserName());
-
-			JwtResponse jwtResponse = JwtResponse.builder().jwtToken(token).username(loginReq.getUserName()).build();
-			return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
+			token = jwtUtil.generateToken(loginReq.getUserName());
+			httpStatus = HttpStatus.OK;
 		}
-			return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+		JwtResponse jwtResponse = JwtResponse.builder().jwtToken(token).message(response).build();
+		return new ResponseEntity<>(jwtResponse, httpStatus);
+			
 	}
 
 }

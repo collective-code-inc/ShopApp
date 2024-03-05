@@ -8,18 +8,21 @@ import lombok.Builder;
 @Builder
 public class JwtResponse {
 
-	@JsonProperty("userName")
-	private String username;
+	@JsonProperty("message")
+	private String message;
 
 	@JsonProperty("token")
 	private String jwtToken;
 
-	public String getUsername() {
-		return username;
+
+	
+
+	public String getMessage() {
+		return message;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public String getJwtToken() {
@@ -30,9 +33,9 @@ public class JwtResponse {
 		this.jwtToken = jwtToken;
 	}
 
-	public JwtResponse(String username, String jwtToken) {
+	public JwtResponse(String message, String jwtToken) {
 		super();
-		this.username = username;
+		this.message = message;
 		this.jwtToken = jwtToken;
 	}
 
@@ -42,7 +45,7 @@ public class JwtResponse {
 
 	@Override
 	public String toString() {
-		return "JwtResponse [username=" + username + ", jwtToken=" + jwtToken + "]";
+		return "JwtResponse [message=" + message + ", jwtToken=" + jwtToken + "]";
 	}
 
 	
