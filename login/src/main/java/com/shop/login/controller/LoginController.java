@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.shop.login.dto.user.JwtResponse;
+
+import com.shop.login.dto.jwt.JwtResponse;
 import com.shop.login.dto.user.LoginReq;
 import com.shop.login.dto.user.UserReq;
 import com.shop.login.jwt.security.JwtUtil;

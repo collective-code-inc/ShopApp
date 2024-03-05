@@ -1,6 +1,7 @@
 package com.shop.login.jwt.security;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +21,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
 
+    private String[] ALLOWED_URL = {"/api/login", "/api/register"};
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
@@ -35,7 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     authenticate(username);
                 }
             }
-        } else if(request.getRequestURL().toString().contains("/api/login")) {
+        } else if(checkForAllowedUrl(request)) {
             authenticate("");
         }
         allow(request, response, filterChain);
@@ -55,6 +58,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, null,
         new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    private boolean checkForAllowedUrl(HttpServletRequest request) {
+        for(String url : Arrays.asList(ALLOWED_URL)) {
+            if(request.getRequestURL().toString().contains(url)) {
+                return true;
+            }
+        }
+        return false;
     }
     
 }

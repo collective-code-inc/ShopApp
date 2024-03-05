@@ -1,4 +1,4 @@
-package com.shop.login.dto.user;
+package com.shop.login.dto.jwt;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
