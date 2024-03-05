@@ -5,18 +5,15 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.shop.login.dto.user.JwtResponse;
 import com.shop.login.dto.user.LoginReq;
 import com.shop.login.dto.user.UserReq;
-import com.shop.login.jwt.security.JwtHelper;
+import com.shop.login.jwt.security.JwtUtil;
 import com.shop.login.service.LoginService;
 import com.shop.login.util.Constants;
 
@@ -28,11 +25,9 @@ public class LoginController {
 
 	@Autowired
 	LoginService loginService;
-	@Autowired
-	private UserDetailsService userDetailsService;
 
 	@Autowired
-	private JwtHelper helper;
+	private JwtUtil jwtUtil;
 
 	@PostMapping(value = "/register", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -46,15 +41,13 @@ public class LoginController {
 	@ResponseBody
 	public ResponseEntity<JwtResponse> login(@RequestBody LoginReq loginReq) {
 		String response = loginService.login(loginReq);
-		if (!response.equals(Constants.LOGIN_SUCCESS)) {
-			return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-		} else {
-			UserDetails userDetails = userDetailsService.loadUserByUsername(loginReq.getUserName());
-			String token = this.helper.generateToken(userDetails);
+		if(response.equals(Constants.LOGIN_SUCCESS)) {
+			String token = jwtUtil.generateToken(loginReq.getUserName());
 
-			JwtResponse jwtResponse = JwtResponse.builder().jwtToken(token).username(userDetails.getUsername()).build();
+			JwtResponse jwtResponse = JwtResponse.builder().jwtToken(token).username(loginReq.getUserName()).build();
 			return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
 		}
+			return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
 	}
 
 }
