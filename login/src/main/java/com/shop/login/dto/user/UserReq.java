@@ -3,7 +3,7 @@ package com.shop.login.dto.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserReq {
-    @JsonProperty("emailId")
+    @JsonProperty("email")
 	private String emailId;
 
 	@JsonProperty("firstName")
