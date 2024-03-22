@@ -5,8 +5,9 @@ orbs:
   testcontainers-cloud-orb: atomicjar/testcontainers-cloud-orb@0.1.0
 jobs:
   test-java:
-    docker:
-      - image: cimg/openjdk:17.0
+    # docker:
+    #   - image: cimg/openjdk:17.0
+    machine: true
     working_directory: ~/project/login
     steps:
       - checkout:

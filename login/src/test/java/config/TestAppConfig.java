@@ -2,6 +2,7 @@ package config;
 
 import javax.sql.DataSource;
 
+import org.junit.ClassRule;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +17,7 @@ import com.shop.login.config.AppConfig;
 @ComponentScan(basePackages = "com")
 public class TestAppConfig extends AppConfig {
 
+    @ClassRule
     private static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:15-alpine");
 
             static {
