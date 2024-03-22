@@ -1,4 +1,4 @@
-package com.shop.login.repo;
+package repo;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,8 +9,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shop.login.config.TestAppConfig;
 import com.shop.login.modal.UserEntity;
+import com.shop.login.repo.UserRepo;
+
+import config.TestAppConfig;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestAppConfig.class)

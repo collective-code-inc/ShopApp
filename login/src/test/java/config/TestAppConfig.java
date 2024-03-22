@@ -1,4 +1,4 @@
-package com.shop.login.config;
+package config;
 
 import javax.sql.DataSource;
 
@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.testcontainers.containers.PostgreSQLContainer;
 
+import com.shop.login.config.AppConfig;
+
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com")
-public class TestAppConfig {
+public class TestAppConfig extends AppConfig {
 
     private static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:15-alpine");
 
