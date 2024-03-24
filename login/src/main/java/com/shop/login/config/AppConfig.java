@@ -45,7 +45,7 @@ public class AppConfig {
     public DataSource getDataSourceLocalMohit() {
         return DataSourceBuilder.create()
         .url("jdbc:postgresql://127.0.0.1:5432/shop_app")
-        .username("adept")
+        .username("postgres")
         .password("password")
         .build();
     }
